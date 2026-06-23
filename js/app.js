@@ -45,3 +45,41 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+function setupTilt() {
+  const tiltTargets = document.querySelectorAll('.glass-card, .schedule-block');
+
+  tiltTargets.forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -3;
+      const rotateY = ((x - centerX) / centerX) * 3;
+
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+    });
+  });
+}
+
+function setupHabitBounce() {
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('habit-card__toggle')) {
+      e.target.classList.remove('bounce');
+      requestAnimationFrame(() => {
+        e.target.classList.add('bounce');
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupTilt();
+  setupHabitBounce();
+});
