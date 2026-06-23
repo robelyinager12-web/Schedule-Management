@@ -91,3 +91,10 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  .header-nav {
+    position: relative;
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+  }
+}
