@@ -24,6 +24,7 @@ function loadData(key, fallback) {
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 }
+
 function exportAllData() {
   const exportPayload = {
     exportedAt: new Date().toISOString(),
@@ -38,7 +39,7 @@ function exportAllData() {
 
   const a = document.createElement('a');
   a.href = url;
-  a.download = `engineer-RY-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.download = `engineer-os-backup-${new Date().toISOString().split('T')[0]}.json`;
   a.click();
 
   URL.revokeObjectURL(url);
@@ -66,35 +67,3 @@ function importAllData(file) {
 
   reader.readAsText(file);
 }
-
-function setupBackupControls() {
-  const header = document.querySelector('.header-left');
-  if (!header) return;
-
-  const exportBtn = document.createElement('button');
-  exportBtn.className = 'backup-btn';
-  exportBtn.textContent = 'Export';
-  exportBtn.setAttribute('aria-label', 'Export all data as JSON backup');
-  exportBtn.addEventListener('click', exportAllData);
-
-  const importLabel = document.createElement('label');
-  importLabel.className = 'backup-btn';
-  importLabel.textContent = 'Import';
-
-  const importInput = document.createElement('input');
-  importInput.type = 'file';
-  importInput.accept = 'application/json';
-  importInput.className = 'sr-only';
-  importInput.addEventListener('change', (e) => {
-    if (e.target.files && e.target.files[0]) {
-      importAllData(e.target.files[0]);
-    }
-  });
-
-  importLabel.appendChild(importInput);
-
-  header.appendChild(exportBtn);
-  header.appendChild(importLabel);
-}
-
-document.addEventListener('DOMContentLoaded', setupBackupControls);
