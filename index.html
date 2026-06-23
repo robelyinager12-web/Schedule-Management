@@ -23,37 +23,34 @@
 
     <header class="site-header glass-panel" id="site-header">
       <div class="header-left">
-        <span class="brand-mark">ENGINEER RY</span>
+        <span class="brand-mark">ENGINEER OS</span>
+        <button class="backup-btn" id="export-btn">Export</button>
+        <label class="backup-btn">
+          Import
+          <input type="file" accept="application/json" class="sr-only" id="import-input" />
+        </label>
       </div>
       <div class="header-center">
         <time id="live-clock" class="live-clock" aria-live="polite">--:--:--</time>
         <span id="live-date" class="live-date">--</span>
       </div>
-     <nav class="header-nav" aria-label="Primary">
-  <button class="nav-link is-active" data-target="view-today">Today</button>
-  <button class="nav-link" data-target="view-week">Week</button>
-  <button class="nav-link" data-target="view-tasks">Tasks</button>
-  <button class="nav-link" data-target="view-habits">Habits</button>
-  <button class="nav-link" data-target="view-kpi">KPIs</button>
-  <button class="nav-link" data-target="view-review">Review</button>
-</nav>
 
-<button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-  <span class="hamburger-line"></span>
-  <span class="hamburger-line"></span>
-  <span class="hamburger-line"></span>
-</button>
-
-<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Primary mobile">
-  <button class="mobile-nav-link is-active" data-target="view-today">Today</button>
-  <button class="mobile-nav-link" data-target="view-week">Week</button>
-  <button class="mobile-nav-link" data-target="view-tasks">Tasks</button>
-  <button class="mobile-nav-link" data-target="view-habits">Habits</button>
-  <button class="mobile-nav-link" data-target="view-kpi">KPIs</button>
-  <button class="mobile-nav-link" data-target="view-review">Review</button>
-</nav>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
     </header>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Primary">
+      <button class="mobile-nav-link is-active" data-target="view-today">Today</button>
+      <button class="mobile-nav-link" data-target="view-week">Week</button>
+      <button class="mobile-nav-link" data-target="view-tasks">Tasks</button>
+      <button class="mobile-nav-link" data-target="view-habits">Habits</button>
+      <button class="mobile-nav-link" data-target="view-kpi">KPIs</button>
+      <button class="mobile-nav-link" data-target="view-review">Review</button>
+    </nav>
 
     <main class="main-content">
 
@@ -64,7 +61,6 @@
         <div class="timeline-wrap">
           <div class="timeline-spine" aria-hidden="true"></div>
           <ol id="schedule-list" class="schedule-list">
-            <!-- Schedule blocks injected by js/schedule.js -->
           </ol>
         </div>
       </section>
@@ -73,7 +69,6 @@
         <h1 id="week-heading" class="view-title">This Week</h1>
         <p class="view-subtitle">Three outcomes. Five days. No guessing.</p>
         <div id="weekly-grid" class="weekly-grid">
-          <!-- Weekly grid injected by js/weekly.js -->
         </div>
       </section>
 
@@ -81,7 +76,6 @@
         <h1 id="tasks-heading" class="view-title">Tasks</h1>
         <p class="view-subtitle">Five buckets. Nothing lives in your head.</p>
         <div id="task-board" class="task-board">
-          <!-- Task columns injected by js/tasks.js -->
         </div>
       </section>
 
@@ -89,7 +83,6 @@
         <h1 id="habits-heading" class="view-title">Habits</h1>
         <p class="view-subtitle">The things that keep the system standing.</p>
         <div id="habit-tracker" class="habit-tracker">
-          <!-- Habit tracker injected by js/habits.js -->
         </div>
       </section>
 
@@ -97,7 +90,6 @@
         <h1 id="kpi-heading" class="view-title">KPIs</h1>
         <p class="view-subtitle">What the week actually measured.</p>
         <div id="kpi-dashboard" class="kpi-dashboard">
-          <!-- KPI cards injected by js/kpi.js -->
         </div>
       </section>
 
@@ -105,7 +97,6 @@
         <h1 id="review-heading" class="view-title">Monthly Review</h1>
         <p class="view-subtitle">Close the loop before opening the next one.</p>
         <div id="review-form" class="review-form">
-          <!-- Review form injected by js/review.js -->
         </div>
       </section>
 
