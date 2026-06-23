@@ -78,3 +78,39 @@
 .glass-card:hover {
   border-color: var(--glass-edge);
 }
+.schedule-block__time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.schedule-block__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.schedule-block__tag {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background: var(--glass-fill-strong);
+  color: var(--text-muted);
+}
+
+.tag--deep-work { color: var(--accent-signal); }
+.tag--coding { color: var(--glass-edge); }
+.tag--learning { color: #C9A8F5; }
+.tag--meeting { color: #F5C97E; }
+.tag--personal { color: var(--text-muted); }
+
+.schedule-error {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  padding: var(--space-4);
+}
