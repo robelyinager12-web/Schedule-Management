@@ -23,20 +23,36 @@
 
     <header class="site-header glass-panel" id="site-header">
       <div class="header-left">
-        <span class="brand-mark">ENGINEER OS</span>
+        <span class="brand-mark">ENGINEER RY</span>
       </div>
       <div class="header-center">
         <time id="live-clock" class="live-clock" aria-live="polite">--:--:--</time>
         <span id="live-date" class="live-date">--</span>
       </div>
-      <nav class="header-nav" aria-label="Primary">
-        <button class="nav-link is-active" data-target="view-today">Today</button>
-        <button class="nav-link" data-target="view-week">Week</button>
-        <button class="nav-link" data-target="view-tasks">Tasks</button>
-        <button class="nav-link" data-target="view-habits">Habits</button>
-        <button class="nav-link" data-target="view-kpi">KPIs</button>
-        <button class="nav-link" data-target="view-review">Review</button>
-      </nav>
+     <nav class="header-nav" aria-label="Primary">
+  <button class="nav-link is-active" data-target="view-today">Today</button>
+  <button class="nav-link" data-target="view-week">Week</button>
+  <button class="nav-link" data-target="view-tasks">Tasks</button>
+  <button class="nav-link" data-target="view-habits">Habits</button>
+  <button class="nav-link" data-target="view-kpi">KPIs</button>
+  <button class="nav-link" data-target="view-review">Review</button>
+</nav>
+
+<button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</button>
+
+<div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Primary mobile">
+  <button class="mobile-nav-link is-active" data-target="view-today">Today</button>
+  <button class="mobile-nav-link" data-target="view-week">Week</button>
+  <button class="mobile-nav-link" data-target="view-tasks">Tasks</button>
+  <button class="mobile-nav-link" data-target="view-habits">Habits</button>
+  <button class="mobile-nav-link" data-target="view-kpi">KPIs</button>
+  <button class="mobile-nav-link" data-target="view-review">Review</button>
+</nav>
     </header>
 
     <main class="main-content">
