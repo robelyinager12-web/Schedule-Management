@@ -1,0 +1,12 @@
+{
+  "blocks": [
+    { "id": "morning-routine", "label": "Morning Routine", "category": "personal", "start": "08:00", "end": "08:30" },
+    { "id": "deep-work-1", "label": "Deep Work Block 1", "category": "deep-work", "start": "09:00", "end": "11:00" },
+    { "id": "coding-session", "label": "Coding Session", "category": "coding", "start": "11:15", "end": "12:30" },
+    { "id": "lunch", "label": "Lunch", "category": "personal", "start": "12:30", "end": "13:30" },
+    { "id": "deep-work-2", "label": "Deep Work Block 2", "category": "deep-work", "start": "14:00", "end": "15:30" },
+    { "id": "collab", "label": "Meetings / Code Review", "category": "meeting", "start": "15:45", "end": "16:45" },
+    { "id": "learning", "label": "Learning Session", "category": "learning", "start": "16:45", "end": "17:30" },
+    { "id": "evening-review", "label": "Evening Review", "category": "personal", "start": "17:30", "end": "18:00" }
+  ]
+}
