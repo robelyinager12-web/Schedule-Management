@@ -269,3 +269,60 @@
 .day-column.is-today .day-column__heading {
   color: var(--accent-signal);
 }
+.habit-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.habit-card__header {
+  width: 100%;
+}
+
+.habit-card__label {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.habit-card__toggle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--glass-border);
+  font-size: var(--fs-xl);
+  color: var(--accent-signal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.habit-card__toggle:hover {
+  border-color: var(--glass-edge);
+}
+
+.habit-card__toggle.is-done {
+  background: var(--accent-signal-dim);
+  border-color: var(--accent-signal);
+}
+
+.habit-card__streak {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.streak-number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.streak-label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
