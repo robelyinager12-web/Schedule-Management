@@ -1,5 +1,3 @@
-// app.js — built fully in Phase 2 (clock + nav wiring)
-console.log("Engineer OS: app.js loaded — Phase 1 scaffold active"); 
 function startClock() {
   const clockEl = document.getElementById('live-clock');
   const dateEl = document.getElementById('live-date');
@@ -20,31 +18,54 @@ function startClock() {
   setInterval(tick, 1000);
 }
 
-function setupNav() {
-  const navLinks = document.querySelectorAll('.nav-link');
+function setupMobileMenu() {
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
   const views = document.querySelectorAll('.view');
 
-  navLinks.forEach((link) => {
+  function openMenu() {
+    mobileMenu.classList.add('is-open');
+    overlay.classList.add('is-open');
+    hamburgerBtn.classList.add('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    hamburgerBtn.classList.remove('is-open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('is-open');
+    if (isOpen) closeMenu(); else openMenu();
+  });
+
+  overlay.addEventListener('click', closeMenu);
+
+  mobileLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const targetId = link.dataset.target;
 
-      navLinks.forEach((l) => l.classList.remove('is-active'));
+      mobileLinks.forEach((l) => l.classList.remove('is-active'));
       link.classList.add('is-active');
 
       views.forEach((view) => {
         view.classList.toggle('is-active', view.id === targetId);
       });
+
+      closeMenu();
     });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
-function init() {
-  startClock();
-  setupNav();
-  console.log('Engineer OS: Phase 2 active — clock and nav live');
-}
-
-document.addEventListener('DOMContentLoaded', init);
 function setupTilt() {
   const tiltTargets = document.querySelectorAll('.glass-card, .schedule-block');
 
@@ -79,61 +100,30 @@ function setupHabitBounce() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  setupTilt();
-  setupHabitBounce();
-});
-function setupMobileMenu() {
-  const hamburgerBtn = document.getElementById('hamburger-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const overlay = document.getElementById('mobile-menu-overlay');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-  const desktopLinks = document.querySelectorAll('.nav-link');
-  const views = document.querySelectorAll('.view');
+function setupBackupButtons() {
+  const exportBtn = document.getElementById('export-btn');
+  const importInput = document.getElementById('import-input');
 
-  function openMenu() {
-    mobileMenu.classList.add('is-open');
-    overlay.classList.add('is-open');
-    hamburgerBtn.classList.add('is-open');
-    hamburgerBtn.setAttribute('aria-expanded', 'true');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', exportAllData);
   }
 
-  function closeMenu() {
-    mobileMenu.classList.remove('is-open');
-    overlay.classList.remove('is-open');
-    hamburgerBtn.classList.remove('is-open');
-    hamburgerBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  hamburgerBtn.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.contains('is-open');
-    if (isOpen) closeMenu(); else openMenu();
-  });
-
-  overlay.addEventListener('click', closeMenu);
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener('click', () => {
-      const targetId = link.dataset.target;
-
-      mobileLinks.forEach((l) => l.classList.remove('is-active'));
-      link.classList.add('is-active');
-
-      desktopLinks.forEach((l) => l.classList.remove('is-active'));
-      const matchingDesktopLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-      if (matchingDesktopLink) matchingDesktopLink.classList.add('is-active');
-
-      views.forEach((view) => {
-        view.classList.toggle('is-active', view.id === targetId);
-      });
-
-      closeMenu();
+  if (importInput) {
+    importInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        importAllData(e.target.files[0]);
+      }
     });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
+  }
 }
 
-document.addEventListener('DOMContentLoaded', setupMobileMenu);
+function init() {
+  startClock();
+  setupMobileMenu();
+  setupTilt();
+  setupHabitBounce();
+  setupBackupButtons();
+  console.log('Engineer OS: app initialized');
+}
+
+document.addEventListener('DOMContentLoaded', init);
