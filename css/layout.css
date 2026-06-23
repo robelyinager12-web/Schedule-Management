@@ -44,15 +44,19 @@
 
 @media (max-width: 768px) {
   .site-header {
-    flex-wrap: wrap;
-    gap: var(--space-3);
+    flex-wrap: nowrap;
   }
 
   .header-nav {
-    order: 3;
-    width: 100%;
-    overflow-x: auto;
-    justify-content: flex-start;
+    display: none;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .mobile-menu-overlay {
+    display: block;
   }
 
   .weekly-grid {
