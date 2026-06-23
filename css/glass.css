@@ -353,3 +353,67 @@
   font-size: var(--fs-xs);
   color: var(--text-muted);
 }
+.review-month-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.review-month-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+}
+
+.review-month-btn:hover {
+  color: var(--text-primary);
+}
+
+.review-month-btn.is-active {
+  background: var(--accent-signal-dim);
+  border-color: var(--accent-signal);
+  color: var(--accent-signal);
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.review-card__heading {
+  font-size: var(--fs-lg);
+}
+
+.review-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.review-field__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.review-field__textarea {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  min-height: 80px;
+  resize: vertical;
+}
+
+.review-field__textarea::placeholder {
+  color: var(--text-faint);
+}
