@@ -417,3 +417,18 @@
 .review-field__textarea::placeholder {
   color: var(--text-faint);
 }
+.backup-btn {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  margin-left: var(--space-2);
+  cursor: pointer;
+}
+
+.backup-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--glass-edge);
+}
