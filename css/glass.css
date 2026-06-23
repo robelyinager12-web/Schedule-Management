@@ -466,4 +466,14 @@
   border-radius: 50%;
   background: var(--accent-signal);
   display: inline-block;
+} 
+.day-column.is-weekend {
+  background: var(--glass-fill-strong);
+}
+
+.day-column__note {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  font-style: italic;
+  margin-top: -4px;
 }
