@@ -1,0 +1,65 @@
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: var(--space-12);
+}
+
+.main-content {
+  padding: 0 var(--space-6);
+}
+
+.timeline-wrap {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.schedule-block {
+  position: relative;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+}
+
+.task-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.habit-tracker,
+.kpi-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .header-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .weekly-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .view-title {
+    font-size: var(--fs-xl);
+  }
+}
