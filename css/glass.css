@@ -326,3 +326,30 @@
   font-size: var(--fs-xs);
   color: var(--text-muted);
 }
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.kpi-card__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.kpi-card--accent .kpi-card__value {
+  color: var(--accent-signal);
+}
+
+.kpi-card__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.kpi-card__sublabel {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
