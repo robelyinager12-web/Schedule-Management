@@ -6,6 +6,15 @@ const CATEGORY_LABELS = {
   'personal': 'Personal'
 };
 
+const DAY_TABS = [
+  { id: 'weekday', label: 'Weekday' },
+  { id: 'saturday', label: 'Saturday' },
+  { id: 'sunday', label: 'Sunday' }
+];
+
+let scheduleConfig = null;
+let activeDayTab = null;
+
 function timeToMinutes(timeStr) {
   const [h, m] = timeStr.split(':').map(Number);
   return h * 60 + m;
@@ -21,7 +30,7 @@ function formatTimeRange(start, end) {
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
-function getDayType() {
+function getActualDayType() {
   const day = new Date().getDay();
   if (day === 0) return 'sunday';
   if (day === 6) return 'saturday';
@@ -63,22 +72,42 @@ function buildScheduleBlock(block, isNow) {
   return li;
 }
 
-async function renderSchedule() {
+function buildDayTabs() {
+  const tabRow = document.createElement('div');
+  tabRow.className = 'day-tab-row';
+
+  const actualDay = getActualDayType();
+
+  DAY_TABS.forEach((tab) => {
+    const btn = document.createElement('button');
+    btn.className = `day-tab${tab.id === activeDayTab ? ' is-active' : ''}`;
+    btn.textContent = tab.label;
+
+    if (tab.id === actualDay) {
+      const dot = document.createElement('span');
+      dot.className = 'day-tab__today-dot';
+      dot.setAttribute('aria-label', 'This is today');
+      btn.appendChild(dot);
+    }
+
+    btn.addEventListener('click', () => {
+      activeDayTab = tab.id;
+      renderSchedule();
+    });
+
+    tabRow.appendChild(btn);
+  });
+
+  return tabRow;
+}
+
+function renderScheduleList() {
   const listEl = document.getElementById('schedule-list');
-  if (!listEl) return;
+  if (!listEl || !scheduleConfig) return;
 
-  let config;
-  try {
-    const res = await fetch('data/schedule-config.json');
-    config = await res.json();
-  } catch (err) {
-    listEl.innerHTML = '<li class="schedule-error">Could not load schedule-config.json</li>';
-    console.error('schedule.js: failed to load config', err);
-    return;
-  }
-
-  const dayType = getDayType();
-  const blocks = config[dayType] || [];
+  const blocks = scheduleConfig[activeDayTab] || [];
+  const actualDay = getActualDayType();
+  const isViewingActualDay = activeDayTab === actualDay;
 
   const now = new Date();
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
@@ -93,10 +122,48 @@ async function renderSchedule() {
   blocks.forEach((block) => {
     const startMin = timeToMinutes(block.start);
     const endMin = timeToMinutes(block.end);
-    const isNow = nowMinutes >= startMin && nowMinutes < endMin;
+    const isNow = isViewingActualDay && nowMinutes >= startMin && nowMinutes < endMin;
     listEl.appendChild(buildScheduleBlock(block, isNow));
   });
 }
 
-document.addEventListener('DOMContentLoaded', renderSchedule);
-setInterval(renderSchedule, 60000);
+function renderSchedule() {
+  const todayView = document.getElementById('view-today');
+  if (!todayView) return;
+
+  let tabContainer = document.getElementById('day-tab-container');
+  if (!tabContainer) {
+    tabContainer = document.createElement('div');
+    tabContainer.id = 'day-tab-container';
+    const timelineWrap = document.querySelector('.timeline-wrap');
+    todayView.insertBefore(tabContainer, timelineWrap);
+  }
+
+  tabContainer.innerHTML = '';
+  tabContainer.appendChild(buildDayTabs());
+
+  renderScheduleList();
+}
+
+async function initSchedule() {
+  const listEl = document.getElementById('schedule-list');
+  if (!listEl) return;
+
+  try {
+    const res = await fetch('data/schedule-config.json');
+    scheduleConfig = await res.json();
+  } catch (err) {
+    listEl.innerHTML = '<li class="schedule-error">Could not load schedule-config.json</li>';
+    console.error('schedule.js: failed to load config', err);
+    return;
+  }
+
+  activeDayTab = getActualDayType();
+  renderSchedule();
+}
+
+document.addEventListener('DOMContentLoaded', initSchedule);
+
+setInterval(() => {
+  if (scheduleConfig) renderScheduleList();
+}, 60000);
