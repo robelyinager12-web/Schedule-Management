@@ -21,6 +21,13 @@ function formatTimeRange(start, end) {
   return `${fmt(start)} – ${fmt(end)}`;
 }
 
+function getDayType() {
+  const day = new Date().getDay();
+  if (day === 0) return 'sunday';
+  if (day === 6) return 'saturday';
+  return 'weekday';
+}
+
 function buildScheduleBlock(block, isNow) {
   const li = document.createElement('li');
   li.className = `schedule-block glass-panel${isNow ? ' is-now' : ''}`;
@@ -70,12 +77,20 @@ async function renderSchedule() {
     return;
   }
 
+  const dayType = getDayType();
+  const blocks = config[dayType] || [];
+
   const now = new Date();
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
   listEl.innerHTML = '';
 
-  config.blocks.forEach((block) => {
+  if (blocks.length === 0) {
+    listEl.innerHTML = '<li class="schedule-error">No blocks configured for this day.</li>';
+    return;
+  }
+
+  blocks.forEach((block) => {
     const startMin = timeToMinutes(block.start);
     const endMin = timeToMinutes(block.end);
     const isNow = nowMinutes >= startMin && nowMinutes < endMin;
