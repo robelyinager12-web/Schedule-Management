@@ -1,4 +1,5 @@
-const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const WEEKEND_DAYS = ['Saturday', 'Sunday'];
 
 let weeklyState = {
   outcomes: ['', '', ''],
@@ -86,14 +87,22 @@ function buildOutcomesBar() {
 
 function buildDayColumn(day) {
   const isToday = new Date().toLocaleDateString('en-US', { weekday: 'long' }) === day;
+  const isWeekend = WEEKEND_DAYS.includes(day);
 
   const column = document.createElement('div');
-  column.className = `glass-card day-column${isToday ? ' is-today' : ''}`;
+  column.className = `glass-card day-column${isToday ? ' is-today' : ''}${isWeekend ? ' is-weekend' : ''}`;
 
   const heading = document.createElement('h3');
   heading.className = 'day-column__heading';
   heading.textContent = day;
   column.appendChild(heading);
+
+  if (isWeekend) {
+    const note = document.createElement('p');
+    note.className = 'day-column__note';
+    note.textContent = day === 'Sunday' ? 'Full day off' : 'Light day';
+    column.appendChild(note);
+  }
 
   const list = document.createElement('ul');
   list.className = 'task-list';
