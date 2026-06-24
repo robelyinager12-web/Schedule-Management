@@ -23,6 +23,7 @@ function setupMobileMenu() {
   const mobileMenu = document.getElementById('mobile-menu');
   const overlay = document.getElementById('mobile-menu-overlay');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  const desktopLinks = document.querySelectorAll('.nav-link');
   const views = document.querySelectorAll('.view');
 
   function openMenu() {
@@ -39,6 +40,12 @@ function setupMobileMenu() {
     hamburgerBtn.setAttribute('aria-expanded', 'false');
   }
 
+  function switchToView(targetId) {
+    mobileLinks.forEach((l) => l.classList.toggle('is-active', l.dataset.target === targetId));
+    desktopLinks.forEach((l) => l.classList.toggle('is-active', l.dataset.target === targetId));
+    views.forEach((view) => view.classList.toggle('is-active', view.id === targetId));
+  }
+
   hamburgerBtn.addEventListener('click', () => {
     const isOpen = mobileMenu.classList.contains('is-open');
     if (isOpen) closeMenu(); else openMenu();
@@ -48,16 +55,14 @@ function setupMobileMenu() {
 
   mobileLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      const targetId = link.dataset.target;
-
-      mobileLinks.forEach((l) => l.classList.remove('is-active'));
-      link.classList.add('is-active');
-
-      views.forEach((view) => {
-        view.classList.toggle('is-active', view.id === targetId);
-      });
-
+      switchToView(link.dataset.target);
       closeMenu();
+    });
+  });
+
+  desktopLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      switchToView(link.dataset.target);
     });
   });
 
@@ -123,7 +128,29 @@ function init() {
   setupTilt();
   setupHabitBounce();
   setupBackupButtons();
+  setupFooter();
   console.log('Engineer OS: app initialized');
 }
-
 document.addEventListener('DOMContentLoaded', init);
+function setupFooter() {
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
+  const footerLinks = document.querySelectorAll('.footer-link');
+  const allNavLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  const views = document.querySelectorAll('.view');
+
+  footerLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const targetId = link.dataset.target;
+
+      allNavLinks.forEach((l) => l.classList.toggle('is-active', l.dataset.target === targetId));
+      views.forEach((view) => view.classList.toggle('is-active', view.id === targetId));
+
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
