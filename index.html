@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineer robel — Your Daily Operating System</title>
+  <meta name="description" content="A personal productivity system for software engineers: schedule, tasks, habits, and growth, in one place." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/glass.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+
+  <body>
+
+  <div class="bg-nebula" aria-hidden="true"></div>
+
+  <div class="lock-screen" id="lock-screen">
+  <div class="lock-screen__card glass-panel glass-panel--strong">
+    <div class="lock-screen__brand">ENGINEER robel</div>
+    <h1 class="lock-screen__title" id="lock-title">Create your account</h1>
+    <p class="lock-screen__subtitle" id="lock-subtitle">Stored on this device only. Not a real account system.</p>
+
+    <form id="lock-form" class="lock-form">
+  <div class="lock-field">
+    <label class="lock-label" for="lock-username">Username</label>
+    <input
+      type="text"
+      id="lock-username"
+      class="lock-input"
+      placeholder="yourname"
+      autocomplete="username"
+      autofocus
+    />
+  </div>
+
+  <div class="lock-field" id="lock-email-field">
+    <label class="lock-label" for="lock-email">Email</label>
+    <input
+      type="email"
+      id="lock-email"
+      class="lock-input"
+      placeholder="you@example.com"
+      autocomplete="email"
+    />
+  </div>
+
+  <div class="lock-field">
+    <label class="lock-label" for="lock-password">Password</label>
+    <input
+      type="password"
+      id="lock-password"
+      class="lock-input"
+      placeholder="At least 6 characters"
+      autocomplete="current-password"
+    />
+  </div>
+
+  <div class="lock-field" id="lock-security-field">
+    <label class="lock-label" for="lock-security-answer">Security question: what city were you born in?</label>
+    <input
+      type="text"
+      id="lock-security-answer"
+      class="lock-input"
+      placeholder="Your answer"
+      autocomplete="off"
+    />
+  </div>
+
+  <p class="lock-error" id="lock-error" aria-live="polite"></p>
+  <button type="submit" class="lock-submit-btn" id="lock-submit-btn">Create account</button>
+</form>
+
+<button type="button" class="lock-reset-link" id="lock-forgot-btn">Forgot password?</button>
+
+    <form id="forgot-form" class="lock-form forgot-form" style="display: none;">
+      <p class="lock-screen__subtitle" id="forgot-question-label">Security question</p>
+
+      <div class="lock-field">
+        <label class="lock-label" for="forgot-answer">Your answer</label>
+        <input type="text" id="forgot-answer" class="lock-input" placeholder="Answer" autocomplete="off" />
+      </div>
+
+      <div class="lock-field">
+        <label class="lock-label" for="forgot-new-password">New password</label>
+        <input type="password" id="forgot-new-password" class="lock-input" placeholder="At least 6 characters" autocomplete="new-password" />
+      </div>
+
+      <p class="lock-error" id="forgot-error" aria-live="polite"></p>
+      <button type="submit" class="lock-submit-btn">Reset password</button>
+      <button type="button" class="lock-reset-link" id="forgot-cancel-btn">Back to login</button>
+    </form>
+  </div>
+</div>
+
+  <div id="app-content" class="app-content--locked">
+
+  <div class="app-shell">
+
+    <header class="site-header glass-panel" id="site-header">
+      <div class="header-left">
+  <span class="brand-mark">ENGINEER robel</span>
+  <button class="backup-btn" id="export-btn">Export</button>
+  <label class="backup-btn">
+    Import
+    <input type="file" accept="application/json" class="sr-only" id="import-input" />
+  </label>
+  <button class="backup-btn" id="logout-btn">Logout</button>
+</div>
+      <div class="header-center">
+        <time id="live-clock" class="live-clock" aria-live="polite">--:--:--</time>
+        <span id="live-date" class="live-date">--</span>
+      </div>
+
+      <nav class="header-nav" aria-label="Primary">
+        <button class="nav-link is-active" data-target="view-today">Today</button>
+        <button class="nav-link" data-target="view-week">Week</button>
+        <button class="nav-link" data-target="view-tasks">Tasks</button>
+        <button class="nav-link" data-target="view-habits">Habits</button>
+        <button class="nav-link" data-target="view-kpi">KPIs</button>
+        <button class="nav-link" data-target="view-review">Review</button>
+      </nav>
+
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Primary">
+      <button class="mobile-nav-link is-active" data-target="view-today">Today</button>
+      <button class="mobile-nav-link" data-target="view-week">Week</button>
+      <button class="mobile-nav-link" data-target="view-tasks">Tasks</button>
+      <button class="mobile-nav-link" data-target="view-habits">Habits</button>
+      <button class="mobile-nav-link" data-target="view-kpi">KPIs</button>
+      <button class="mobile-nav-link" data-target="view-review">Review</button>
+    </nav>
+
+    <main class="main-content">
+
+      <section id="view-today" class="view is-active" aria-labelledby="today-heading">
+        <h1 id="today-heading" class="view-title">Today</h1>
+        <p class="view-subtitle">Your day, scaled to how it actually feels.</p>
+
+        <div class="timeline-wrap">
+          <div class="timeline-spine" aria-hidden="true"></div>
+          <ol id="schedule-list" class="schedule-list">
+          </ol>
+        </div>
+      </section>
+
+      <section id="view-week" class="view" aria-labelledby="week-heading">
+        <h1 id="week-heading" class="view-title">This Week</h1>
+        <p class="view-subtitle">Three outcomes. Five days. No guessing.</p>
+        <div id="weekly-grid" class="weekly-grid">
+        </div>
+      </section>
+
+      <section id="view-tasks" class="view" aria-labelledby="tasks-heading">
+        <h1 id="tasks-heading" class="view-title">Tasks</h1>
+        <p class="view-subtitle">Five buckets. Nothing lives in your head.</p>
+        <div id="task-board" class="task-board">
+        </div>
+      </section>
+
+      <section id="view-habits" class="view" aria-labelledby="habits-heading">
+        <h1 id="habits-heading" class="view-title">Habits</h1>
+        <p class="view-subtitle">The things that keep the system standing.</p>
+        <div id="habit-tracker" class="habit-tracker">
+        </div>
+      </section>
+
+      <section id="view-kpi" class="view" aria-labelledby="kpi-heading">
+        <h1 id="kpi-heading" class="view-title">KPIs</h1>
+        <p class="view-subtitle">What the week actually measured.</p>
+        <div id="kpi-dashboard" class="kpi-dashboard">
+        </div>
+      </section>
+
+      <section id="view-review" class="view" aria-labelledby="review-heading">
+        <h1 id="review-heading" class="view-title">Monthly Review</h1>
+        <p class="view-subtitle">Close the loop before opening the next one.</p>
+        <div id="review-form" class="review-form">
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-mark">ENGINEER OS</span>
+          <p class="footer-tagline">A personal system for sustainable, focused engineering work.</p>
+        </div>
+
+        <div class="footer-links">
+          <button class="footer-link" data-target="view-today">Today</button>
+          <button class="footer-link" data-target="view-week">Week</button>
+          <button class="footer-link" data-target="view-tasks">Tasks</button>
+          <button class="footer-link" data-target="view-habits">Habits</button>
+          <button class="footer-link" data-target="view-kpi">KPIs</button>
+          <button class="footer-link" data-target="view-review">Review</button>
+        </div>
+
+        <div class="footer-meta">
+          <p class="footer-note">All data stored locally in this browser. Nothing is sent to a server.</p>
+          <p class="footer-copyright">© <span id="footer-year"></span> Engineer OS. Built for engineers, by an engineer.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  </div>
+
+  <script src="js/lock.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/weekly.js"></script>
+  <script src="js/habits.js"></script>
+  <script src="js/kpi.js"></script>
+  <script src="js/review.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
